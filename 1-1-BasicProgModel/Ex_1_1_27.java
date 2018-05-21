@@ -32,7 +32,9 @@ public class Ex_1_1_27 {
     public static double binomial3(int N, int k, double p) {
         double[][]  bino = new double[N+1][k+1];
 
-        // 此处必须把矩阵中需要更新的元素 (i <= j) 初始化为 -1 作为需要递归更新的标志，因为当 N 足够大时，如 N = 2000 时，bino[2000][5] == 0，此时 0 不能再作为需要更新的标志位了，否则会继续递归造成重叠。另外，对于 (i > j) 的部分，不需要递归更新，只需直接返回 0.0，因此可以此处直接省略对其进行初始化。
+        // 此处必须把矩阵中需要更新的元素 (i <= j) 初始化为 -1 作为需要递归更新的标志，因为当 N 足够大时，
+        // 如 N = 2000 时，bino[2000][5] == 0，此时 0 不能再作为需要更新的标志位了，否则会继续递归造成
+        // 重叠。另外，对于 (i > j) 的部分，不需要递归更新，只需直接返回 0.0，因此可以此处直接省略对其进行初始化。
         for (int i = 0; i <= N; i++) {
             for (int j = 0; j <= k && j <= i; j++) {
                 bino[i][j] = -1;
@@ -45,7 +47,8 @@ public class Ex_1_1_27 {
     public static double binomial3(int N, int k, double p, double[][] bino) {
         // base cases
         if (N == 0 && k == 0) return 1.0;
-        // 此处添加 N < k，虽然其值本身就是 0.0，可以通过下一条语句返回 bino[N][k]，但直接返回 0.0 可以避免进行数组访问，降低了复杂度。
+        // 此处添加 N < k，虽然其值本身就是 0.0，可以通过下一条语句返回 bino[N][k]，
+        // 但直接返回 0.0 可以避免进行数组访问，降低了复杂度。
         if ( (N < 0 || k < 0) || (N < k) ) return 0.0;
         if (bino[N][k] != -1) return bino[N][k];
 
